@@ -6,5 +6,5 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    <h1>Tripple A</h1>
+    <h1>Tripple A  kreangkrai</h1>
 </div>
