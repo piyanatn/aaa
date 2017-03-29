@@ -918,7 +918,7 @@
                             </li>
                             
                              <li>
-                                <a href="#" title="Admin Dashboard">
+                                <a href="<?= Url::to('index.php?r=chk') ?>" title="Admin Dashboard">
                                     <i class="glyph-icon icon-linecons-wallet"></i>
                                     <span>ระบบตรวจสอบสิทธิ์</span>
                                 </a>
