@@ -9,9 +9,28 @@ use yii\helpers\Html;
 <h1>นำเข้าข้อมูลจากระบบ HIS</h1>
 <br>
 <div class="content-box mrg25B">
-    <h3 class="content-box-header bg-google text-left">
+    <h3 class="content-box-header bg-blue text-left">
         <i class="glyph-icon icon-comments"></i>
-        Sortable checklist
+        ค้นหา
+    </h3>
+    <div class="content-box-wrapper">
+        <?= Html::beginForm(); ?>
+                        
+                       เลือกวันที่ :
+                            <?php
+                            echo  yii\jui\DatePicker::widget(['name' => 'attributeName', 'clientOptions' => ['defaultDate' => '2014-01-01']]) 
+                            ?>
+                        
+                        <button class='btn btn-danger'>ประมวลผล</button>
+
+           <?= Html::endForm(); ?>
+        
+    </div>
+</div>
+<div class="content-box mrg25B">
+    <h3 class="content-box-header bg-green text-left">
+        <i class="glyph-icon icon-comments"></i>
+        ผู้ป่วยที่มารับบริการ วันที่ 
     </h3>
     <div class="content-box-wrapper">
 
@@ -31,9 +50,20 @@ use yii\helpers\Html;
                 'attribute' => 'tname',
                 'label' => 'ชื่อ-สกุล'
             ],
-                [
-                'attribute' => 'pdx',
-                'label' => 'Pdx'
+               ['attribute' => 'pdx',
+                'label' => 'Pdx',
+                'value' => function ($model, $key, $index, $widget) {
+                    if ($model['pdx'] == null) {
+                        return "<span class='bs-label bg-orange tooltip-button' style='background-color: #EF5350' > ว่าง </span>";
+                    } else {
+                       return "<span class='bs-label bg-orange tooltip-button' style='background-color: #4CAF50' >".$model['pdx']." </span>";
+                    }
+                },
+                'filterType' => GridView::FILTER_COLOR,
+                'hAlign' => 'middle',
+                'format' => 'raw',
+            //'width' => '150px',
+            //'noWrap' => true
             ],
                 [
                 'attribute' => 'yname',
@@ -47,22 +77,8 @@ use yii\helpers\Html;
                 'attribute' => 'department',
                 'label' => 'แผนก'
             ],
-                [
-                'attribute' => 'pdx',
-                'label' => 'dd',
-                'value' => function ($model, $key, $index, $widget) {
-                    if ($model['pdx'] == '') {
-                        return "<font class='text-red'>" . $model['pdx'] . "</font>";
-                    } else {
-                        return "<font class='text-green'>" . $model['pdx'] . "</font>";
-                    }
-                },
-                'filterType' => GridView::FILTER_COLOR,
-                'hAlign' => 'middle',
-                'format' => 'raw',
-            //'width' => '150px',
-            //'noWrap' => true
-            ],
+                
+               /*
                 [
                 'attribute' => 'an',
                 'label' => '#',
@@ -70,7 +86,7 @@ use yii\helpers\Html;
                     $an ='';
                     $bed ='';
                     $ward = '';
-                    return Html::a("<span class='badge' style='background-color: #0099ff' ><i class='fa fa-cart-plus'></i></span>", ['/food/foodadd/create', 'an' => $an, 'bed' => $bed, 'ward' => $ward], [
+                    return Html::a("<span class='bs-label bg-orange tooltip-button' style='background-color: #0099ff' ><i class='glyph-icon  icon-bell' ></i></span>", ['/food/foodadd/create', 'an' => $an, 'bed' => $bed, 'ward' => $ward], [
                                 'class' => 'activity-add-link',
                                 'title' => 'สั่งอาหาร',
                                 'data-toggle' => 'modal',
@@ -82,7 +98,7 @@ use yii\helpers\Html;
                 'filterType' => GridView::FILTER_COLOR,
                 'hAlign' => 'middle',
                 'format' => 'raw',
-            ],
+            ],*/
         ];
         /*
           echo '<div class="col-md-12" align="right" >';
