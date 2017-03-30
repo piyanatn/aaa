@@ -38,6 +38,27 @@ class ImporthisController extends \yii\web\Controller
         
         
         
+        
+         $connection = Yii::$app->db2;
+        $sqlm = "SELECT i.an,a.bedno,CONCAT(p.pname,p.fname,' ',p.lname) AS tname,
+			 w.name AS wname
+                    FROM ipt i
+                    LEFT JOIN iptadm a ON a.an = i.an
+                    LEFT JOIN patient p ON p.hn = i.hn
+                    LEFT JOIN ward w ON w.ward = i.ward
+                    WHERE i.an='$an'";
+        $datam = $connection->createCommand($sqlm)
+                ->queryAll();
+        for ($im = 0; $im < sizeof($datam); $im++) {
+            $tname = $datam[$im]['tname'];
+            $an = $datam[$im]['an'];
+            $bedno = $datam[$im]['bedno'];
+            $wname = $datam[$im]['wname'];
+        }
+        
+        
+        
+        
         if (Yii::$app->request->isPost) {
              if (isset($_POST['date1']) == 'opd') {
                $sql ="SELECT o.hn,p.cid,CONCAT(p.pname,p.fname,' ',p.lname) AS tname,
