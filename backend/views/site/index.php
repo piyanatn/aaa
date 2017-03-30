@@ -5,9 +5,31 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
 use yii\helpers\Html;
+use nex\datepicker\DatePicker;
+
 ?>
 <h1>นำเข้าข้อมูลจากระบบ HIS</h1>
 <br>
+
+<div class="col-md-3">
+    <?= Html::beginForm(); ?>
+    <?=
+    DatePicker::widget([
+        'name' => 'date1',
+        //'attribute' => 'date1',
+        'language' => 'th',
+        'size' => 'lg',
+        'readonly' => TRUE,
+        'placeholder' => date('Y-m-d'),
+        'clientOptions' => [
+            'format' => 'L',
+            'minDate' => '2015-08-10',
+            'maxDate' => '2015-09-10',
+        ],
+    ]);
+    ?>
+</div>
+
 <div class="content-box mrg25B">
     <h3 class="content-box-header bg-google text-left">
         <i class="glyph-icon icon-comments"></i>
@@ -67,8 +89,8 @@ use yii\helpers\Html;
                 'attribute' => 'an',
                 'label' => '#',
                 'value' => function($model, $key) {
-                    $an ='';
-                    $bed ='';
+                    $an = '';
+                    $bed = '';
                     $ward = '';
                     return Html::a("<span class='badge' style='background-color: #0099ff' ><i class='fa fa-cart-plus'></i></span>", ['/food/foodadd/create', 'an' => $an, 'bed' => $bed, 'ward' => $ward], [
                                 'class' => 'activity-add-link',
